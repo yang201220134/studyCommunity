@@ -1,40 +1,34 @@
 package com.ysy.studycommunity.dto;
 
 public class GitHubUser {
-    private String name;
-    private Long id;
-    private String bio;
+    private String login;
+    private String id;
+
 
     public GitHubUser() {
     }
 
-    public GitHubUser(String name, Long id, String bio) {
-        this.name = name;
+    public GitHubUser(String login, String id) {
+        this.login = login;
         this.id = id;
-        this.bio = bio;
+
     }
 
-    public String getName() {
-        return name;
+    public String getLogin() {
+        return login;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getBio() {
-        return bio;
-    }
 
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
 }
