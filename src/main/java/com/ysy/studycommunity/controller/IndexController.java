@@ -8,13 +8,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-public class HelloController {
+public class IndexController {
 
-    @GetMapping("/greet")
-    public String greet(@RequestParam(name="name",defaultValue = "world",required = false) String name, Model model){
-        model.addAttribute("name",name);
-        return "hello";
+    @RequestMapping("/")
+    public String index(Model model){
+        return "index";
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     @PostMapping("/greet")
     public String greetPost(@RequestParam(name="name",defaultValue = "postwold",required = false) String name,Model model){
         model.addAttribute("name",name+"post");
