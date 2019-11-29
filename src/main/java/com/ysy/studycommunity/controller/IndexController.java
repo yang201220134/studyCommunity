@@ -1,4 +1,4 @@
-package com.ysy.studycommunity;
+package com.ysy.studycommunity.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
