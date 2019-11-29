@@ -6,6 +6,7 @@ import com.ysy.studycommunity.provider.GitHubProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,7 +27,7 @@ public class AuthorizeController {
 
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code")String code, @RequestParam(name="state")String state
-                , HttpServletRequest request){
+                , HttpServletRequest request, Model model){
         System.out.println(clientId);
         System.out.println(clientSecret);
         System.out.println(redirectUrl);
@@ -45,14 +46,19 @@ public class AuthorizeController {
         if(gitHubUser!=null){
             //登录成功，写cookie和session
             request.getSession().setAttribute("user",gitHubUser);
+            System.out.println("即将跳转不为空，已经设置了session");
+            GitHubUser gitHubUser1 = (GitHubUser) request.getSession().getAttribute("user");
+            System.out.println("login" +gitHubUser1.getLogin());
+            model.addAttribute("muser",gitHubUser1.getLogin());
             return "redirect:index";
         }else {
             //登录失败，重新登录
+            System.out.println("为空,返回登录页面");
             return "redirect:index";
         }
 
 
-        return "index";
+
     }
 
 
