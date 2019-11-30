@@ -27,11 +27,15 @@ public class IndexController {
             System.out.println("cookie name"+cookie.getValue());
             if(cookie.getName().equals("token")){
                 String token = cookie.getValue();
+                System.out.println("准备进数据库"+token);
 
                 User user = userMapper.findByToken(token);
+                System.out.println("出数据库"+user);
                 if(user !=null){
                     request.getSession().setAttribute("user",user);
+                    System.out.println(user);
                     System.out.println("去数据库查找token"+user.getToken());
+
                 }
 
                 break;
