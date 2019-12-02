@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
 @Controller
 public class PublishController
@@ -126,9 +127,14 @@ public class PublishController
         }
 
 
-        long date = System.currentTimeMillis();
-
+        Date date = new Date();
         question.setGmt_modified(date);
+        question.setGmt_create(date);
+
+        User user1 =(User)request.getSession().getAttribute("user");
+        int userId = userMapper.findIdByUserName(user1.getName());
+
+        question.setUser_id(userId);
         questionMapper.insert(question);
         return "redirect:/";
     }

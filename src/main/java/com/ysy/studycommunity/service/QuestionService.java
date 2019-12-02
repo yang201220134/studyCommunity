@@ -2,10 +2,13 @@ package com.ysy.studycommunity.service;
 
 import com.ysy.studycommunity.dto.QuestionDTO;
 import com.ysy.studycommunity.mapper.QuestionMapper;
+import com.ysy.studycommunity.mapper.UserMapper;
 import com.ysy.studycommunity.model.Question;
+import com.ysy.studycommunity.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +17,11 @@ public class QuestionService {
 
     @Autowired
     private QuestionMapper questionMapper;
-    List<QuestionDTO> getQuestionDTOList(){
-        List<QuestionDTO> list = new ArrayList<>();
+    @Autowired
+    private UserMapper userMapper;
+
+    public List<QuestionDTO> getQuestionDTOList(HttpServletRequest request){
+        List<QuestionDTO> listQuestionDTO = new ArrayList<>();
 
         List<Question> listQuestion = questionMapper.getQuestionList();
 
@@ -23,11 +29,14 @@ public class QuestionService {
              ) {
 
             QuestionDTO questionDTO = new QuestionDTO();
-            questionDTO
-
+            questionDTO.setQuestion(question);
+            User user = new User();
+            user = userMapper.findUserById(question.getUser_id());
+            questionDTO.setUser(user);
+            listQuestionDTO.add(questionDTO);
         }
 
-        return
+        return listQuestionDTO;
     }
 
 }

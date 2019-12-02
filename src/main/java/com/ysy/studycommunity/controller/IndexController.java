@@ -1,9 +1,11 @@
 package com.ysy.studycommunity.controller;
 
+import com.ysy.studycommunity.dto.QuestionDTO;
 import com.ysy.studycommunity.mapper.QuestionMapper;
 import com.ysy.studycommunity.mapper.UserMapper;
 import com.ysy.studycommunity.model.Question;
 import com.ysy.studycommunity.model.User;
+import com.ysy.studycommunity.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,7 +25,8 @@ public class IndexController {
     private UserMapper userMapper;
     @Autowired
     private QuestionMapper questionMapper;
-
+    @Autowired
+    private QuestionService questionService;
 
     @RequestMapping("/")
     public String index(Model model, HttpServletRequest request){
@@ -55,8 +58,9 @@ public class IndexController {
 
         }
 
-        List<Question> questionList = questionMapper.getQuestionList();
-        model.addAttribute("questionList",questionList);
+       // List<Question> questionList = questionMapper.getQuestionList();
+        List<QuestionDTO> questionDTOListData = questionService.getQuestionDTOList(request);
+        model.addAttribute("questionDTOListData",questionDTOListData);
 
 
         return "index";

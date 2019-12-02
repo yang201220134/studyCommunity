@@ -77,17 +77,19 @@
 
             <ul class="media-list">
 
-                <li class="media" th:each="question:${questionList}">
+                <li class="media" th:each="questionDTO:${questionDTOListData}">
+                    <div th:if="${questionDTO.getUser()!=null}">
                     <div class="media-left">
                         <a href="#">
-                            <img class="media-object img-rounded " src="https://avatars1.githubusercontent.com/u/23686896?v=4" alt="...">
+                            <img class="media-object img-rounded "  th:src="${questionDTO.getUser().getAvatar_url()}" alt="...">
                         </a>
                     </div>
                     <div class="media-body">
-                        <h4 class="media-heading" th:text="${question.getTitle()}"></h4>
-                        <span th:text="${question.getDescription()}"></span><br>
-                        <span class="text-color-999"> •<span th:text="${question.getComment_count()}"></span>个评论
-                            • <span th:text="${question.getView_count()}"></span> 次浏览 • <span th:text="${question.getGmt_modified()}"></span></span>
+                        <h4 class="media-heading" th:text="${questionDTO.question.getTitle()}"></h4>
+                        <span th:text="${questionDTO.question.getDescription()}"></span><br>
+                        <span class="text-color-999"> •<span th:text="${questionDTO.question.getComment_count()}"></span>个评论
+                            • <span th:text="${questionDTO.question.getView_count()}"></span> 次浏览 • <span th:text="${questionDTO.question.getGmt_modified()}"></span></span>
+                    </div>
                     </div>
                 </li>
 

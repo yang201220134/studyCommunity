@@ -17,4 +17,5 @@ public interface QuestionMapper {
     //获取页面列表
     @Select("select * from question")
     public List<Question> getQuestionList();
+
 }
