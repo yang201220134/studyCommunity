@@ -26,6 +26,6 @@ public interface UserMapper {
 
      @Select("select * from user where id = #{id}")
       User findUserById(int id);
-     @Select("select top 1 id from user where name = ${name}")
+     @Select("select top 1 id from user where name = #{name}")
       int findIdByUserName(String name);
 }

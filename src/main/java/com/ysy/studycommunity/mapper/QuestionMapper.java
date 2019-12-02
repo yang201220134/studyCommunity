@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper
 
 public interface QuestionMapper {
-    @Insert("insert into question (title,description,creator,tag) values(#{title},#{description},#{creator},#{tag})")
+    @Insert("insert into question (title,description,creator,tag,user_id) values(#{title},#{description},#{creator},#{tag},#{user_id})")
     public void insert(Question question);
 
     //获取页面列表
