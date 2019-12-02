@@ -101,6 +101,10 @@ public class PublishController
                 break;
             }
         }
+        model.addAttribute("title",question.getTitle());
+        model.addAttribute("description",question.getDescription());
+        model.addAttribute("tag",question.getTag());
+
         if(user ==null){
             model.addAttribute("error","用户未登录");
             return "publish";
