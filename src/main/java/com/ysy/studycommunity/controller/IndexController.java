@@ -1,6 +1,8 @@
 package com.ysy.studycommunity.controller;
 
+import com.ysy.studycommunity.mapper.QuestionMapper;
 import com.ysy.studycommunity.mapper.UserMapper;
+import com.ysy.studycommunity.model.Question;
 import com.ysy.studycommunity.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class IndexController {
@@ -22,6 +25,10 @@ public class IndexController {
     @RequestMapping("/")
     public String index(Model model, HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
+
+        if(cookies!=null){
+
+
         for(Cookie cookie :cookies){
             System.out.println("cookie key"+cookie.getName());
             System.out.println("cookie name"+cookie.getValue());
@@ -43,7 +50,9 @@ public class IndexController {
         }
 
 
+        }
 
+        List<Question> questionList = QuestionMapper.getQuestionList();
 
 
         return "index";

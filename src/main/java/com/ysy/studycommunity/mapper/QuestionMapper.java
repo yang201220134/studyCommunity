@@ -11,4 +11,7 @@ public interface QuestionMapper {
     @Insert("insert into question (title,description,creator,tag) values(#{title},#{description},#{creator},#{tag})")
     public void insert(Question question);
 
+    //获取页面列表
+
+
 }

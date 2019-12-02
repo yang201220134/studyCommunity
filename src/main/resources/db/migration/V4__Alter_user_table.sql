@@ -1,0 +1,1 @@
+alter table PUBLIC.USER add avatar_url varchar(100) null;

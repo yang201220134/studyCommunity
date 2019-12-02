@@ -37,6 +37,7 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public String callback(@RequestParam(name = "code")String code, @RequestParam(name="state")String state
                 , HttpServletRequest request, Model model, HttpServletResponse httpServletResponse){
+
         System.out.println(clientId);
         System.out.println(clientSecret);
         System.out.println(redirectUrl);
@@ -65,10 +66,11 @@ public class AuthorizeController {
             User user = new User();
             String token = UUID.randomUUID().toString();
             user.setToken(token);
-            user.setName(gitHubUser1.getLogin());
+            user.setName(gitHubUser.getLogin());
             user.setId(Integer.parseInt(gitHubUser.getId()));
             user.setGMT_CREATE(System.currentTimeMillis());
             user.setGMT_MODIFIED(user.getGMT_CREATE());
+            user.setAvatar_url(gitHubUser.getAvatar_url());
             userMapper.insert(user);
             httpServletResponse.addCookie(new Cookie("token",token));
 

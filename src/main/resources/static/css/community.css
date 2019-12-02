@@ -9,3 +9,12 @@ body{
     float: right;
     margin-bottom: 15px;
 }
+.media-object{
+    width:65px;
+    height:65px;
+}
+.text-color-999{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
