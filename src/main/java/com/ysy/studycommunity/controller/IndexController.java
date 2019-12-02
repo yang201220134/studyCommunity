@@ -21,6 +21,9 @@ public class IndexController {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private QuestionMapper questionMapper;
+
 
     @RequestMapping("/")
     public String index(Model model, HttpServletRequest request){
@@ -52,7 +55,8 @@ public class IndexController {
 
         }
 
-        List<Question> questionList = QuestionMapper.getQuestionList();
+        List<Question> questionList = questionMapper.getQuestionList();
+        model.addAttribute("questionList",questionList);
 
 
         return "index";

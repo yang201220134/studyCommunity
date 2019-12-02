@@ -126,9 +126,10 @@ public class PublishController
         }
 
 
+        long date = System.currentTimeMillis();
 
-
+        question.setGmt_modified(date);
         questionMapper.insert(question);
-        return "index";
+        return "redirect:/";
     }
 }
