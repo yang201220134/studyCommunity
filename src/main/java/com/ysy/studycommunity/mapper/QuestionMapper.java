@@ -11,11 +11,13 @@ import java.util.List;
 @Mapper
 
 public interface QuestionMapper {
-    @Insert("insert into question (title,description,creator,tag,user_id) values(#{title},#{description},#{creator},#{tag},#{user_id})")
+    @Insert("insert into question (gmt_create,gmt_modified,title,description,creator,tag,user_id) values(#{gmt_create},#{gmt_modified},#{title},#{description},#{creator},#{tag},#{user_id})")
     public void insert(Question question);
 
     //获取页面列表
-    @Select("select * from question")
-    public List<Question> getQuestionList();
+    @Select("select * from question limit #{offset},#{everyPageShowCount}")
+    public List<Question> getQuestionList(Integer offset,Integer everyPageShowCount);
 
+    @Select("select count(*) from question")
+    Integer questionCount();
 }

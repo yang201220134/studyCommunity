@@ -18,3 +18,7 @@ body{
     font-weight: normal;
     color: #999;
 }
+.pageNav{
+    float:right;
+    margin-right: 15px;
+}

@@ -1,5 +1,6 @@
 package com.ysy.studycommunity.service;
 
+import com.ysy.studycommunity.dto.PageDTO;
 import com.ysy.studycommunity.dto.QuestionDTO;
 import com.ysy.studycommunity.mapper.QuestionMapper;
 import com.ysy.studycommunity.mapper.UserMapper;
@@ -20,10 +21,10 @@ public class QuestionService {
     @Autowired
     private UserMapper userMapper;
 
-    public List<QuestionDTO> getQuestionDTOList(HttpServletRequest request){
+    public List<QuestionDTO> getQuestionDTOList(HttpServletRequest request, Integer currentPage, Integer everyPageShowCount){
         List<QuestionDTO> listQuestionDTO = new ArrayList<>();
-
-        List<Question> listQuestion = questionMapper.getQuestionList();
+        Integer offset = everyPageShowCount*(currentPage -1);
+        List<Question> listQuestion = questionMapper.getQuestionList(offset,everyPageShowCount);
 
         for (Question question:listQuestion
              ) {
@@ -38,5 +39,6 @@ public class QuestionService {
 
         return listQuestionDTO;
     }
+
 
 }

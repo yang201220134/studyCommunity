@@ -1,15 +1,14 @@
 package com.ysy.studycommunity.controller;
 
+import com.ysy.studycommunity.dto.PageDTO;
 import com.ysy.studycommunity.dto.QuestionDTO;
 import com.ysy.studycommunity.mapper.QuestionMapper;
 import com.ysy.studycommunity.mapper.UserMapper;
-import com.ysy.studycommunity.model.Question;
 import com.ysy.studycommunity.model.User;
 import com.ysy.studycommunity.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,10 +28,13 @@ public class IndexController {
     private QuestionService questionService;
 
     @RequestMapping("/")
-    public String index(Model model, HttpServletRequest request){
+    public String index(Model model, HttpServletRequest request,
+                        @RequestParam(name="currentPage",defaultValue = "4")Integer currentPage,
+                        @RequestParam(name="everyPageShowCount",defaultValue = "3")Integer everyPageShowCount){
         Cookie[] cookies = request.getCookies();
 
         if(cookies!=null){
+
 
 
         for(Cookie cookie :cookies){
@@ -59,8 +61,21 @@ public class IndexController {
         }
 
        // List<Question> questionList = questionMapper.getQuestionList();
-        List<QuestionDTO> questionDTOListData = questionService.getQuestionDTOList(request);
-        model.addAttribute("questionDTOListData",questionDTOListData);
+        List<QuestionDTO> questionDTOListData = questionService.getQuestionDTOList(request,currentPage,everyPageShowCount);
+
+
+       // for (QuestionDTO questionDTOListDatum : questionDTOListData) {
+       //     questionDTOListDatum.getQuestion().setDescription("resert");
+       // }
+        PageDTO pageDTO = new PageDTO();
+        pageDTO.setQuestionDTOList(questionDTOListData);
+        pageDTO.setQuestionCount(questionMapper.questionCount());
+
+        pageDTO.initPageData(currentPage,everyPageShowCount);
+
+        System.out.println("currentPage--------------"+currentPage);
+
+        model.addAttribute("pageDTO",pageDTO);
 
 
         return "index";
