@@ -20,19 +20,22 @@ public class MyQuestionService {
     @Autowired
     private QuestionMapper questionMapper;
 
+    private  Integer userId;
     @Value("${page.size}")
     private Integer everyPageSize;
-    public List<Question> getOneUserQuestionList(User user,Integer currentPage,Integer everyPageSize){
-        Integer userId = userMapper.findIdByUserName(user.getName());
-        return questionMapper.getQuestionByUserId(userId,currentPage,everyPageSize);
-    }
 
 
     public MyQuestionPageDTO getMyQuestionPageDTO(User user,Integer currentPage){
+        userId = userMapper.findIdByUserName(user.getName());
+        List<Question> questionList = questionMapper.getQuestionByUserId(userId,currentPage,this.everyPageSize);
         System.out.println("个人问题页当前页面service"+currentPage);
         MyQuestionPageDTO myQuestionPageDTO = new MyQuestionPageDTO();
-        myQuestionPageDTO.setQuestionList(getOneUserQuestionList(user,currentPage,everyPageSize));
-        myQuestionPageDTO.initPageData(currentPage,everyPageSize,user);
+
+        myQuestionPageDTO.setQuestionCount(questionMapper.getQuestionTotalByUserId(userId));
+
+        myQuestionPageDTO.setQuestionList(questionList);
+
+        myQuestionPageDTO.initPageData(currentPage,this.everyPageSize,user);
 
         return myQuestionPageDTO;
     }

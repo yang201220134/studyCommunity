@@ -18,13 +18,16 @@ public interface QuestionMapper {
     @Select("select * from question limit #{offset},#{everyPageShowCount}")
     public List<Question> getQuestionList(Integer offset,Integer everyPageShowCount);
 
+
     @Select("select count(*) from question")
     Integer questionCount();
 
 
-    @Select("select * from question where user_id = #{id}")
-    List<Question> getQuestionByUserId(Integer id);
+    @Select("select * from question where user_id = #{id} limit #{offset},#{everyPageShowCount}")
+    List<Question> getQuestionByUserId(Integer id,Integer offset,Integer everyPageShowCount);
 
+    @Select("select count(*) from question where user_id = #{id}")
+    Integer getQuestionTotalByUserId(Integer id);
 
 
 }

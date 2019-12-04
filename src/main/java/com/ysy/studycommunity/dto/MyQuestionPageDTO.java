@@ -27,7 +27,7 @@ public class MyQuestionPageDTO{
 
     public void initPageData(Integer currenpagetwo,Integer everyShowPageCount,User user){
         this.user = user;
-        this.questionCount = questionList.size();
+       
         this.currentPage = currenpagetwo;
         this.everyShowPageCount = everyShowPageCount;
         //初始化总页数

@@ -122,7 +122,7 @@
                 <ul class="pagination pageNav">
                     <li th:if="${myQuestionPageDTO.hasGotoFirstPage}">
 
-                        <a href="#"   th:href="${'/?currentPage='+1}" aria-label="Previous">
+                        <a href="#"   th:href="${'/myquestion?currentPage='+1}" aria-label="Previous">
                             <span aria-hidden="true">首页</span>
                         </a>
 
@@ -138,7 +138,7 @@
 
 
                     <li th:each="pageeach:${myQuestionPageDTO.getPages()}">
-                        <a href="/" th:href="${'/?currentPage='+pageeach}" th:text="${pageeach}"></a>
+                        <a href="/" th:href="${'/myquestion?currentPage='+pageeach}" th:text="${pageeach}"></a>
                     </li>
 
 
@@ -148,7 +148,7 @@
                         </a>
                     </li>
                     <li th:if="${myQuestionPageDTO.hasGotoEndPage}">
-                        <a href="#" th:href="${'/?currentPage='+ myQuestionPageDTO.getTotalPage()}" aria-label="Next">
+                        <a href="#" th:href="${'/myquestion?currentPage='+ myQuestionPageDTO.getTotalPage()}" aria-label="Next">
                             <span aria-hidden="true">尾页</span>
                         </a>
                     </li>
