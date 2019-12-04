@@ -19,6 +19,7 @@ public class PageDTO {
     private Integer totalPage;
     private Integer offset;
     private Integer pagesSize;
+    private Boolean isAddMid  = false;
 
     public void initPageData(Integer currenpagetwo,Integer everyShowPageCount){
         this.currentPage = currenpagetwo;
@@ -44,12 +45,22 @@ public class PageDTO {
 
 
          offset = everyShowPageCount*(currentPage - 1);
-
+        isAddMid = false;
+        if(currentPage > totalPage){
+            currentPage = totalPage;
+        }
+        if(currenpagetwo < 1)
+        {
+            currentPage = 1;
+        }
         for(int i =1;i<=3;i++){
             if(currentPage - i> 0){
                 pages.add(0,currentPage - i);
             }
-            pages.add(currentPage);
+           if(!isAddMid){
+               pages.add(currentPage);
+               isAddMid = true;
+           }
             if(currentPage + i <= totalPage){
                 pages.add(currentPage+i);
             }

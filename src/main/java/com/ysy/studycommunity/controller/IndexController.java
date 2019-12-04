@@ -7,6 +7,7 @@ import com.ysy.studycommunity.mapper.UserMapper;
 import com.ysy.studycommunity.model.User;
 import com.ysy.studycommunity.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,10 +28,14 @@ public class IndexController {
     @Autowired
     private QuestionService questionService;
 
+    @Value("${page.size}")
+    private Integer everyPageShowCount;
+
     @RequestMapping("/")
     public String index(Model model, HttpServletRequest request,
-                        @RequestParam(name="currentPage",defaultValue = "4")Integer currentPage,
-                        @RequestParam(name="everyPageShowCount",defaultValue = "3")Integer everyPageShowCount){
+                        @RequestParam(name="currentPage",defaultValue = "1")Integer currentPage
+                        ){
+
         Cookie[] cookies = request.getCookies();
 
         if(cookies!=null){
