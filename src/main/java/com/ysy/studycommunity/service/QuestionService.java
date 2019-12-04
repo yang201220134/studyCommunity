@@ -24,7 +24,7 @@ public class QuestionService {
     public List<QuestionDTO> getQuestionDTOList(HttpServletRequest request, Integer currentPage, Integer everyPageShowCount){
         List<QuestionDTO> listQuestionDTO = new ArrayList<>();
         Integer totalQuestionCount = questionMapper.questionCount();
-        Integer totalPage = totalQuestionCount /everyPageShowCount + 1
+        Integer totalPage = totalQuestionCount /everyPageShowCount + 1;
         if(currentPage > totalPage){
             currentPage = totalPage;
         }
@@ -49,6 +49,8 @@ public class QuestionService {
 
         return listQuestionDTO;
     }
-
+        public Integer getQuestionCount(){
+        return questionMapper.questionCount();
+        }
 
 }

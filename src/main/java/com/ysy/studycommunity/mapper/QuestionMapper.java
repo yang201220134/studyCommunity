@@ -20,4 +20,9 @@ public interface QuestionMapper {
 
     @Select("select count(*) from question")
     Integer questionCount();
+
+
+    @Select("select * from question where user_id = #{id}")
+    List<Question> getQuestionByUserId(Integer id);
+
 }

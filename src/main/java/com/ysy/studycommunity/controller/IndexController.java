@@ -5,6 +5,7 @@ import com.ysy.studycommunity.dto.QuestionDTO;
 import com.ysy.studycommunity.mapper.QuestionMapper;
 import com.ysy.studycommunity.mapper.UserMapper;
 import com.ysy.studycommunity.model.User;
+import com.ysy.studycommunity.service.PageService;
 import com.ysy.studycommunity.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +28,8 @@ public class IndexController {
     private QuestionMapper questionMapper;
     @Autowired
     private QuestionService questionService;
+    @Autowired
+    private PageService pageService;
 
     @Value("${page.size}")
     private Integer everyPageShowCount;
@@ -64,21 +67,7 @@ public class IndexController {
 
 
         }
-
-       // List<Question> questionList = questionMapper.getQuestionList();
-        List<QuestionDTO> questionDTOListData = questionService.getQuestionDTOList(request,currentPage,everyPageShowCount);
-
-
-       // for (QuestionDTO questionDTOListDatum : questionDTOListData) {
-       //     questionDTOListDatum.getQuestion().setDescription("resert");
-       // }
-        PageDTO pageDTO = new PageDTO();
-        pageDTO.setQuestionDTOList(questionDTOListData);
-        pageDTO.setQuestionCount(questionMapper.questionCount());
-
-        pageDTO.initPageData(currentPage,everyPageShowCount);
-
-        System.out.println("currentPage--------------"+currentPage);
+        PageDTO pageDTO = pageService.getPageDTO(currentPage,everyPageShowCount,request);
 
         model.addAttribute("pageDTO",pageDTO);
 
