@@ -25,4 +25,6 @@ public interface QuestionMapper {
     @Select("select * from question where user_id = #{id}")
     List<Question> getQuestionByUserId(Integer id);
 
+
+
 }

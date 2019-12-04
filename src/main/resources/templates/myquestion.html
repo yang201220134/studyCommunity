@@ -82,21 +82,21 @@
 
             <ul class="media-list">
 
-                <li class="media" th:each="${}">
-                    <div th:if="${questionDTO.getUser()!=null}">
+                <li class="media" th:each="question:${myQuestionPageDTO.getQuestionList()}">
+                    <div th:if="${myQuestionPageDTO.getUser()!=null}">
                         <div class="media-left">
                             <a href="#">
-                                <img class="media-object img-rounded " th:src="${questionDTO.getUser().getAvatar_url()}"
+                                <img class="media-object img-rounded " th:src="${myQuestionPageDTO.getUser().getAvatar_url()}"
                                      alt="...">
                             </a>
                         </div>
                         <div class="media-body">
-                            <h4 class="media-heading" th:text="${questionDTO.question.getTitle()}"></h4>
-                            <span th:text="${questionDTO.question.getDescription()}"></span><br>
+                            <h4 class="media-heading" th:text="${question.getTitle()}"></h4>
+                            <span th:text="${question.getDescription()}"></span><br>
                             <span class="text-color-999"> •<span
-                                    th:text="${questionDTO.question.getComment_count()}"></span>个评论
-                            • <span th:text="${questionDTO.question.getView_count()}"></span> 次浏览 • <span
-                                        th:text="${#dates.format(questionDTO.question.getGmt_modified(),'yyyy-MM-dd')}"></span></span>
+                                    th:text="${question.getComment_count()}"></span>个评论
+                            • <span th:text="${question.getView_count()}"></span> 次浏览 • <span
+                                        th:text="${#dates.format(question.getGmt_modified(),'yyyy-MM-dd')}"></span></span>
                         </div>
                     </div>
                 </li>
@@ -120,14 +120,14 @@
             <nav aria-label="Page navigation">
 
                 <ul class="pagination pageNav">
-                    <li th:if="${pageDTO.hasGotoFirstPage}">
+                    <li th:if="${myQuestionPageDTO.hasGotoFirstPage}">
 
                         <a href="#"   th:href="${'/?currentPage='+1}" aria-label="Previous">
                             <span aria-hidden="true">首页</span>
                         </a>
 
                     </li>
-                    <li th:if="${pageDTO.hasshowPrevious}">
+                    <li th:if="${myQuestionPageDTO.hasshowPrevious}">
 
                             <a href="#" aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
@@ -137,18 +137,18 @@
 
 
 
-                    <li th:each="pageeach:${pageDTO.getPages()}">
+                    <li th:each="pageeach:${myQuestionPageDTO.getPages()}">
                         <a href="/" th:href="${'/?currentPage='+pageeach}" th:text="${pageeach}"></a>
                     </li>
 
 
-                    <li th:if="${pageDTO.hasshownNext}">
+                    <li th:if="${myQuestionPageDTO.hasshownNext}">
                         <a href="#" aria-label="Next">
                             <span aria-hidden="true">&raquo;</span>
                         </a>
                     </li>
-                    <li th:if="${pageDTO.hasGotoEndPage}">
-                        <a href="#" th:href="${'/?currentPage='+ pageDTO.getTotalPage()}" aria-label="Next">
+                    <li th:if="${myQuestionPageDTO.hasGotoEndPage}">
+                        <a href="#" th:href="${'/?currentPage='+ myQuestionPageDTO.getTotalPage()}" aria-label="Next">
                             <span aria-hidden="true">尾页</span>
                         </a>
                     </li>

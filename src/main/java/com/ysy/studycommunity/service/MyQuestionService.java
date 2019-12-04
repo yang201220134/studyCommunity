@@ -22,18 +22,17 @@ public class MyQuestionService {
 
     @Value("${page.size}")
     private Integer everyPageSize;
-    public List<Question> getOneUserQuestionList(User user){
+    public List<Question> getOneUserQuestionList(User user,Integer currentPage,Integer everyPageSize){
         Integer userId = userMapper.findIdByUserName(user.getName());
-        return questionMapper.getQuestionByUserId(userId);
+        return questionMapper.getQuestionByUserId(userId,currentPage,everyPageSize);
     }
 
 
     public MyQuestionPageDTO getMyQuestionPageDTO(User user,Integer currentPage){
+        System.out.println("个人问题页当前页面service"+currentPage);
         MyQuestionPageDTO myQuestionPageDTO = new MyQuestionPageDTO();
-        myQuestionPageDTO.setQuestionList(getOneUserQuestionList(user));
-        myQuestionPageDTO.initPageData(currentPage,everyPageSize);
-
-
+        myQuestionPageDTO.setQuestionList(getOneUserQuestionList(user,currentPage,everyPageSize));
+        myQuestionPageDTO.initPageData(currentPage,everyPageSize,user);
 
         return myQuestionPageDTO;
     }

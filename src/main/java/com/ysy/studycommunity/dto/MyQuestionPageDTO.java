@@ -1,6 +1,7 @@
 package com.ysy.studycommunity.dto;
 
 import com.ysy.studycommunity.model.Question;
+import com.ysy.studycommunity.model.User;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -21,10 +22,11 @@ public class MyQuestionPageDTO{
     private Integer offset;
     private Integer pagesSize;
     private Boolean isAddMid  = false;
+    private User user = new User();
 
 
-    public void initPageData(Integer currenpagetwo,Integer everyShowPageCount){
-
+    public void initPageData(Integer currenpagetwo,Integer everyShowPageCount,User user){
+        this.user = user;
         this.questionCount = questionList.size();
         this.currentPage = currenpagetwo;
         this.everyShowPageCount = everyShowPageCount;
