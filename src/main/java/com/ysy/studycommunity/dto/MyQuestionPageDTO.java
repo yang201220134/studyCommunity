@@ -1,8 +1,10 @@
 package com.ysy.studycommunity.dto;
 
+import com.ysy.studycommunity.mapper.QuestionMapper;
 import com.ysy.studycommunity.model.Question;
 import com.ysy.studycommunity.model.User;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,10 +26,12 @@ public class MyQuestionPageDTO{
     private Boolean isAddMid  = false;
     private User user = new User();
 
+    @Autowired
+    private QuestionMapper questionMapper;
 
     public void initPageData(Integer currenpagetwo,Integer everyShowPageCount,User user){
         this.user = user;
-       
+        this.questionCount = questionMapper.getProfileQuestionSum(user.getId());
         this.currentPage = currenpagetwo;
         this.everyShowPageCount = everyShowPageCount;
         //初始化总页数

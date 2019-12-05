@@ -31,6 +31,9 @@ public class MyQuestionController {
         System.out.println("个人问题页当前页面controller"+currentPage);
         MyQuestionPageDTO myQuestionPageDTO = myQuestionService.getMyQuestionPageDTO(user,currentPage);
         model.addAttribute("myQuestionPageDTO",myQuestionPageDTO);
+
+
+
         return "myquestion";
     }
 

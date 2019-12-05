@@ -23,57 +23,8 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <a href="/"> <span class="sr-only">生瑜社区</span></a>
+<div th:insert="~{navigation :: nav}"></div>
 
-            </button>
-            <a class="navbar-brand" href="#">生瑜社区</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="搜索问题">
-                </div>
-                <button type="submit" class="btn btn-default">搜索</button>
-                <a href="/publish" class="btn btn-default">发布问题</a>
-                <span th:if="${error!=null}">
-                     <span th:text="${error}"></span></span>
-            </form>
-
-            <ul class="nav navbar-nav navbar-right">
-
-
-                <li class="dropdown" th:if="${session.user ==null}">
-
-                    <a href="https://github.com/login/oauth/authorize?client_id=4cedc62043f05ed8f59c&redirect_uri=http://localhost:9999/callback&scope=user&state=1">登录</a>
-
-                </li>
-                <li class="dropdown" th:if="${session.user !=null}">
-
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                       aria-expanded="false" th:text="${session.user.getName()}">  <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-
-                        <li><a href="/myquestion">我的问题</a></li>
-                        <li><a href="#">退出登录</a></li>
-
-                    </ul>
-                </li>
-
-
-            </ul>
-
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-</nav>
 <div class="container-fluid main">
 
     <div class="row">
@@ -100,6 +51,26 @@
                                         th:text="${#dates.format(questionDTO.question.getGmt_modified(),'yyyy-MM-dd')}"></span></span>
                         </div>
                     </div>
+
+
+                    <div th:if="${questionDTO.getUser()!=null}">
+                        <div class="media-left">
+                            <a href="#">
+                                <img class="media-object img-rounded " th:src="${questionDTO.getUser().getAvatar_url()}"
+                                     alt="...">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading" th:text="${questionDTO.question.getTitle()}"></h4>
+                            <span th:text="${questionDTO.question.getDescription()}"></span><br>
+                            <span class="text-color-999"> •<span
+                                    th:text="${questionDTO.question.getComment_count()}"></span>个评论
+                            • <span th:text="${questionDTO.question.getView_count()}"></span> 次浏览 • <span
+                                        th:text="${#dates.format(questionDTO.question.getGmt_modified(),'yyyy-MM-dd')}"></span></span>
+                        </div>
+                    </div>
+
+
                 </li>
 
 

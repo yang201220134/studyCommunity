@@ -29,5 +29,11 @@ public interface QuestionMapper {
     @Select("select count(*) from question where user_id = #{id}")
     Integer getQuestionTotalByUserId(Integer id);
 
+    @Select("select count(*) from question where user_id = #{userId}")
+    Integer getProfileQuestionSum (Integer userId);
+
+    @Select("select * from question where user_id = #{userId} limit #{offset},#{size}")
+    List<Question> getProfileQuestionList(Integer userId,Integer offset,Integer size);
+
 
 }
