@@ -140,4 +140,11 @@ public class PublishController
         questionMapper.insert(question);
         return "redirect:/";
     }
+
+    @RequestMapping("/test")
+    public String test(){
+
+        return "test";
+    }
+
 }

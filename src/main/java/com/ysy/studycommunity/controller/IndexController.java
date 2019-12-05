@@ -96,4 +96,9 @@ public class IndexController {
         model.addAttribute("name",name+"post");
         return "hello";
     }
+    @RequestMapping("/login")
+    public String login(){
+
+        return "login";
+    }
 }
