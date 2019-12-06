@@ -35,5 +35,6 @@ public interface QuestionMapper {
     @Select("select * from question where user_id = #{userId} limit #{offset},#{size}")
     List<Question> getProfileQuestionList(Integer userId,Integer offset,Integer size);
 
-
+    @Select("select * from question where id = #{id}")
+    Question getQuestionById(Integer id);
 }

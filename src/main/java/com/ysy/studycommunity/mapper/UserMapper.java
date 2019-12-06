@@ -28,4 +28,6 @@ public interface UserMapper {
       User findUserById(int id);
      @Select("select top 1 id from user where name = #{name}")
       int findIdByUserName(String name);
+
+
 }

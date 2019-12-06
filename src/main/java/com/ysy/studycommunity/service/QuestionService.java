@@ -6,6 +6,7 @@ import com.ysy.studycommunity.mapper.QuestionMapper;
 import com.ysy.studycommunity.mapper.UserMapper;
 import com.ysy.studycommunity.model.Question;
 import com.ysy.studycommunity.model.User;
+import com.ysy.studycommunity.provider.SessionUserProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,9 @@ public class QuestionService {
     private QuestionMapper questionMapper;
     @Autowired
     private UserMapper userMapper;
+
+    @Autowired
+    private SessionUserProvider sessionUserProvider;
 
     public List<QuestionDTO> getQuestionDTOList(HttpServletRequest request, Integer currentPage, Integer everyPageShowCount){
         List<QuestionDTO> listQuestionDTO = new ArrayList<>();
@@ -52,5 +56,27 @@ public class QuestionService {
         public Integer getQuestionCount(){
         return questionMapper.questionCount();
         }
+
+
+
+        public Question getOneQuestionById(Integer id){
+
+
+            Question question =  new Question();
+            question = questionMapper.getQuestionById(id);
+
+
+
+            return  question;
+
+        }
+
+        public User getFawentiUser(Integer id){
+            return userMapper.findUserById(id);
+        }
+
+
+
+
 
 }

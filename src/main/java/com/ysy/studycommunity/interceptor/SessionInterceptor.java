@@ -58,7 +58,7 @@ public class SessionInterceptor implements HandlerInterceptor {
             if (!islogin) {
                 System.out.println("因为没有登录 开始跳转到登录");
               //  request.getRequestDispatcher("/login");
-               response.sendRedirect("http://localhost:9999/");
+               //response.sendRedirect("http://localhost:9999/");
                 return true;
             }
 
